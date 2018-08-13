@@ -1,56 +1,18 @@
-/* This script supports IE9+ */
-(function() {
-  /* Opening modal window function */
-  function openModal() {
-      /* Get trigger element */
-      var modalTrigger = document.getElementsByClassName('jsModalTrigger');
+// Modal button
+var openModal = document.getElementById('open-modal');
 
-      /* Set onclick event handler for all trigger elements */
-      for(var i = 0; i < modalTrigger.length; i++) {
-          modalTrigger[i].onclick = function() {
-            var target = this.getAttribute('href').substr(1);
-            var modalWindow = document.getElementById(target);
+// Modal ID
+var modal = document.getElementById('modal-demo');
 
-            modalWindow.classList ? modalWindow.classList.add('open') : modalWindow.className += ' ' + 'open'; 
-          }
-      }   
-  }
+// Close modal button
+var closeModal = document.getElementsByClassName('close-modal')[0];
 
-  function closeModal(){
-    /* Get close button */
-    var closeButton = document.getElementsByClassName('jsModalClose');
-    var closeOverlay = document.getElementsByClassName('jsOverlay');
+// Open modal event listener
+openModal.addEventListener('click', function(){
+    modal.classList.toggle('visible');
+});
 
-    /* Set onclick event handler for close buttons */
-      for(var i = 0; i < closeButton.length; i++) {
-        closeButton[i].onclick = function() {
-          var modalWindow = this.parentNode.parentNode;
-
-          modalWindow.classList ? modalWindow.classList.remove('open') : modalWindow.className = modalWindow.className.replace(new RegExp('(^|\\b)' + 'open'.split(' ').join('|') + '(\\b|$)', 'gi'), ' ');
-        }
-      }   
-
-    /* Set onclick event handler for modal overlay */
-      for(var i = 0; i < closeOverlay.length; i++) {
-        closeOverlay[i].onclick = function() {
-          var modalWindow = this.parentNode;
-
-          modalWindow.classList ? modalWindow.classList.remove('open') : modalWindow.className = modalWindow.className.replace(new RegExp('(^|\\b)' + 'open'.split(' ').join('|') + '(\\b|$)', 'gi'), ' ');
-        }
-      }  
-
-  }
-
-  /* Handling domready event IE9+ */
-  function ready(fn) {
-    if (document.readyState != 'loading'){
-      fn();
-    } else {
-      document.addEventListener('DOMContentLoaded', fn);
-    }
-  }
-
-  /* Triggering modal window function after dom ready */
-  ready(openModal);
-  ready(closeModal);
-}());
+// Close modal event listener
+closeModal.addEventListener('click', function(){
+    modal.classList.remove('visible');
+});
